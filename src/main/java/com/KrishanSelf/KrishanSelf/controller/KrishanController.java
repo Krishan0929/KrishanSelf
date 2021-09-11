@@ -33,4 +33,10 @@ public class KrishanController
 
         return krishanService.getCourseForStudent(id);
     }
+
+    @GetMapping("/courses/{course_id}/students")
+    public List<student> getStudentForCourse(@PathVariable(name = "course_id") int id) {
+
+        return krishanService.getStudentForCourse(id);
+    }
 }

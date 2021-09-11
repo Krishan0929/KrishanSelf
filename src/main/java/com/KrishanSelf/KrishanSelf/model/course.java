@@ -4,14 +4,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Data
 @Getter
 @Setter
 @NoArgsConstructor
@@ -26,8 +22,12 @@ public class course
 
     private String name;
 
-    @ManyToMany(mappedBy = "courses")
+    @ManyToMany
     @JsonIgnore
+    @JoinTable(name = "student_course",
+            joinColumns ={@JoinColumn(name = "course_id",referencedColumnName = "course_id") },
+            inverseJoinColumns = {@JoinColumn(name = "student_id",referencedColumnName = "student_id")}
+    )
     private List<student> students;
 
 
